@@ -14,4 +14,4 @@ def get_mask_account(account_number: str) -> str:
 
 
 if __name__ == "__main__":
-    print('Вы запустили сам модуль! Этого не надо делать.')
+    print("Вы запустили сам модуль! Этого не надо делать.")
