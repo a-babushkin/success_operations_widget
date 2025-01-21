@@ -11,3 +11,8 @@ def mask_account_card(type_card_or_account: str) -> str:
         return get_mask_account(splited_items[-1])
     else:
         return get_mask_card_number(splited_items[-1])
+
+
+def get_date(unformated_date: str) -> str:
+    year, month, day = unformated_date[:10].split('-')
+    return f'{day}.{month}.{year}'
