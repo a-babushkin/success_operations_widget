@@ -12,9 +12,8 @@ cards_and_accounts = (
 )
 
 if __name__ == "__main__":
-    print("Вывод маскированных номеров катр и счетов:")
+    print("Вывод маскированных номеров карт и счетов и их типов:")
     for item in cards_and_accounts:
-        print(item.split()[0], end=" ")
         print(mask_account_card(item))
 
     print('Вывод даты в формате "ДД.ММ.ГГГГ":')
