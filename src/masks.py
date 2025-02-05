@@ -5,13 +5,23 @@
 
 def get_mask_card_number(card_number: str) -> str:
     """Функция маскировки номера банковской карты"""
-    return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[12:]}"
+    number = ""
+    for symbol in card_number:
+        if symbol.isdigit():
+            number += symbol
+    if len(number) != 16:
+        raise Exception("Не стандартный размер номера карты!")
+    else:
+        return f"{number[:4]} {number[4:6]}** **** {number[12:]}"
 
 
 def get_mask_account(account_number: str) -> str:
     """Функция маскировки номера банковского счета"""
-    return f"**{str(account_number)[-4:]}"
-
-
-if __name__ == "__main__":
-    print("Вы запустили сам модуль! Этого не надо делать.")
+    number = ""
+    for symbol in account_number:
+        if symbol.isdigit():
+            number += symbol
+    if len(number) != 20:
+        raise Exception("Не стандартный размер номера счета!")
+    else:
+        return f"**{str(number)[-4:]}"
