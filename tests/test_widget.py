@@ -22,6 +22,8 @@ from src.widget import get_date, mask_account_card
     ],
 )
 def test_mask_account_card(account_card_str: str, result: str) -> None:
+    """Тестирование корректного распознавания и применения нужного типа маскировки
+    в зависимости от типа входных данных"""
     assert mask_account_card(account_card_str) == result
 
 
@@ -40,4 +42,5 @@ def test_mask_account_card(account_card_str: str, result: str) -> None:
     ],
 )
 def test_get_date(date_str: str, result: str) -> None:
+    """Тестирование правильности преобразования даты."""
     assert get_date(date_str) == result

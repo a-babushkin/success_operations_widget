@@ -14,11 +14,13 @@ from src.masks import get_mask_account, get_mask_card_number
     ],
 )
 def test_get_mask_card_number(card_str: str, result: str) -> None:
+    """Тестирование правильности маскирования номера карты."""
     assert get_mask_card_number(card_str) == result
 
 
 @pytest.mark.parametrize("card_str", ["78687", "715830077868734726758", ""])
 def test_get_mask_card_number_not_standard_length(card_str: str) -> None:
+    """Тестирование правильности маскирования номера карты при исключениях."""
     with pytest.raises(Exception) as exc_info:
         get_mask_card_number(card_str)
 
@@ -35,11 +37,13 @@ def test_get_mask_card_number_not_standard_length(card_str: str) -> None:
     ],
 )
 def test_get_mask_account(account_str: str, result: str) -> None:
+    """Тестирование правильности маскирования номера счета."""
     assert get_mask_account(account_str) == result
 
 
 @pytest.mark.parametrize("account_str", ["78687", "715830077868734726758", ""])
 def test_get_mask_account_number_not_standard_length(account_str: str) -> None:
+    """Тестирование правильности маскирования номера счета при исключениях."""
     with pytest.raises(Exception) as exc_info:
         get_mask_account(account_str)
 
