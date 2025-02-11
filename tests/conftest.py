@@ -64,7 +64,7 @@ def fixture_filter_by_state_canc() -> list[dict]:
 
 
 @pytest.fixture
-def transactions() -> list[dict]:
+def fixture_transactions() -> list[dict]:
     """Фикстура для тестирования модуля generators"""
     return [
         {
