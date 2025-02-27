@@ -33,7 +33,7 @@ def test_log_file_output() -> None:
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_filename = temp_file.name
 
-    @log(temp_filename)
+    @log(filename=temp_filename)
     def add(a: int, b: int) -> int:
         """Проверочная функция для декоратора @log, сложения одного числа с другим"""
         return a + b
@@ -51,7 +51,7 @@ def test_log_file_error() -> None:
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_filename = temp_file.name
 
-    @log(temp_filename)
+    @log(filename=temp_filename)
     def add(a: int, b: int) -> int:
         """Проверочная функция для декоратора @log, сложения одного числа с другим"""
         return a + b

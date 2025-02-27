@@ -32,7 +32,7 @@ def log(filename: Any = None) -> Callable[[Callable[..., Any]], Callable[..., An
                 write_log(
                     f"{func.__name__} ok! \n"
                     f'Function "{func.__name__}" successfully finished, result = {result} \n'
-                    f"Time wasted: {finish - start}"
+                    f"Time wasted: {finish - start:.6f}"
                 )
                 return result
             except Exception as e:
