@@ -30,8 +30,18 @@ poetry update
 - Обновлен отчет покрытия в папке htmlcov;
 - Добавлено тестирование модуля decorators;
 - Еще раз обновлен отчет покрытия в папке htmlcov;
+- Добавлено тестирование на все новые функции;
 
 Для самостоятельной проверки покрытия тестами проекта запустите в Терминале команду `pytest --cov`
+
+## Добавление новых функций:
+
+- Модуль Генераторов (filter_by_currency(), transaction_descriptions(), card_number_generator())
+- Чтение JSON файла (read_json_file())
+- Выделение суммы из трансакции (get_transactions_amount())
+- Конвертация валюты спомощью внешнего API (convert_currency())
+- Чтение CSV а файла (get_transaction_from_csv_file())
+- Чтение Excell файла (get_transaction_from_excel_file())
 
 ## Документация:
 
