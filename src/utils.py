@@ -44,3 +44,11 @@ def get_transactions_amount(transaction: dict) -> float:
             return result[1]
         logger.error("Ошибка конвертации. Возвращаемая сумма транзакции = 0.0")
         return 0.0
+
+
+def search_substr_in_description(transactions: list[dict], search_str: str) -> list[dict]:
+    pass
+
+
+def search_category_in_description(transactions: list[dict], categories: list) -> dict:
+    pass
