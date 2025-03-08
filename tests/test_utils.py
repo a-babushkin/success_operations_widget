@@ -2,8 +2,12 @@ import json
 from typing import Any
 from unittest.mock import mock_open, patch
 
-from src.utils import get_transactions_amount, read_json_file, search_category_in_description, \
-    search_substr_in_description
+from src.utils import (
+    get_transactions_amount,
+    read_json_file,
+    search_category_in_description,
+    search_substr_in_description,
+)
 
 
 @patch("builtins.open")
@@ -59,27 +63,40 @@ def test_get_transactions_amount_rub() -> None:
 
 def test_search_substr_in_description_ok(fixture_transactions: list[dict]) -> None:
     """Тестирование поиска строки в описании транзакций, строка найдена"""
-    required_result = [{'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916',
-                        'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}},
-                        'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658',
-                        'to': 'Visa Platinum 8990922113665229'}]
-    assert search_substr_in_description(fixture_transactions, 'Перевод с карты') == required_result
+    required_result = [
+        {
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "amount": "56883.54",
+            "currency_name": "USD",
+            "currency_code": "USD",
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        }
+    ]
+    assert search_substr_in_description(fixture_transactions, "Перевод с карты") == required_result
 
 
 def test_search_substr_in_description_wrong_description(fixture_transactions: list[dict]) -> None:
     """Тестирование поиска строки в описании транзакций, нет искомой транзакции"""
-    required_result = []
-    assert search_substr_in_description(fixture_transactions, 'Неправильная строка') == required_result
+    required_result: list = []
+    assert search_substr_in_description(fixture_transactions, "Неправильная строка") == required_result
 
 
 def test_search_category_in_description_ok(fixture_transactions: list[dict]) -> None:
     """Тестирование подсчета кол-ва транзакций в списке категорий, есть хотя бы одна категория"""
-    required_result = {'Перевод организации': 2, 'Перевод с карты на карту': 1}
-    assert search_category_in_description(fixture_transactions, ['Открытие вклада', 'Перевод организации',
-                                                                 'Перевод с карты']) == required_result
+    required_result = {"Перевод организации": 2, "Перевод с карты на карту": 1}
+    assert (
+        search_category_in_description(
+            fixture_transactions, ["Открытие вклада", "Перевод организации", "Перевод с карты"]
+        )
+        == required_result
+    )
 
 
 def test_search_category_in_description_category_not_found(fixture_transactions: list[dict]) -> None:
     """Тестирование подсчета кол-ва транзакций в списке категорий, нет искомых категорий"""
-    required_result = {}
-    assert search_category_in_description(fixture_transactions, ['1', '2', '3']) == required_result
+    required_result: dict[str, int] = {}
+    assert search_category_in_description(fixture_transactions, ["1", "2", "3"]) == required_result
