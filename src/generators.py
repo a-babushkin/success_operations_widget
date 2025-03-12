@@ -5,24 +5,24 @@
 from typing import Iterator
 
 
-def filter_by_currency(transaction_list: list[dict], currency: str) -> Iterator:
+def filter_by_currency(transactions: list[dict], currency: str) -> Iterator:
     """Функция принимает на вход список словарей, представляющих транзакции.
     И возвращает итератор, который поочередно выдает транзакции,
     где валюта операции соответствует заданной в currency"""
-    if not transaction_list:
+    if not transactions:
         yield "Пустой список!"
-    if not list(filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transaction_list)):
+    if not list(filter(lambda x: x["currency_code"] == currency, transactions)):
         yield "Нет такой валюты!"
-    for item_trans in filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transaction_list):
+    for item_trans in filter(lambda x: x["currency_code"] == currency, transactions):
         yield item_trans
 
 
-def transaction_descriptions(transaction_list: list[dict]) -> Iterator:
+def transaction_descriptions(transactions: list[dict]) -> Iterator:
     """Генератор принимает список словарей с транзакциями
     и возвращает описание каждой операции по очереди"""
-    if not transaction_list:
+    if not transactions:
         yield "Пустой список!"
-    for item_trans in transaction_list:
+    for item_trans in transactions:
         yield item_trans["description"]
 
 

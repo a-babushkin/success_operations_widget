@@ -1,5 +1,7 @@
 import json
 import logging
+import re
+from collections import Counter
 from typing import Any
 
 from src.external_api import convert_currency
@@ -19,6 +21,12 @@ def read_json_file(path_to_file: str) -> Any:
         with open(path_to_file, "r", encoding="utf-8") as file:
             data = json.load(file)
             logger.info(f"Функция сработала штатно, получены данные: {data}")
+            for item in data:
+                item["amount"] = item.get("operationAmount", {}).get("amount")
+                item["currency_name"] = item.get("operationAmount", {}).get("currency", {}).get("name")
+                item["currency_code"] = item.get("operationAmount", {}).get("currency", {}).get("code")
+                if item.get("operationAmount"):
+                    del item["operationAmount"]
             return data
     except FileNotFoundError:
         logger.error(f"Файл по пути {path_to_file} не найден")
@@ -44,3 +52,20 @@ def get_transactions_amount(transaction: dict) -> float:
             return result[1]
         logger.error("Ошибка конвертации. Возвращаемая сумма транзакции = 0.0")
         return 0.0
+
+
+def search_substr_in_description(transactions: list[dict], search_str: str) -> list[dict]:
+    """Поиск строки в поле описание (description) каждой транзакции из списка транзакций"""
+    pattern = re.compile(re.escape(search_str), re.IGNORECASE)
+    result = [transaction for transaction in transactions if pattern.search(transaction.get("description", ""))]
+    return result
+
+
+def search_category_in_description(transactions: list[dict], categories: list) -> dict:
+    """Подсчитывает количество транзакций в указанных категориях"""
+    category_count: dict[str, int] = {}
+    for item in categories:
+        pattern = re.compile(re.escape(item), re.IGNORECASE)
+        result = [transaction for transaction in transactions if pattern.search(transaction.get("description", ""))]
+        category_count.update(Counter(x["description"] for x in result))
+    return category_count
