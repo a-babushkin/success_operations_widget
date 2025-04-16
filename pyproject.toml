@@ -8,6 +8,11 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "pandas-stubs (>=2.2.3.241126,<3.0.0.0)"
 ]
 
 [tool.poetry.group.lint.dependencies]
@@ -15,6 +20,11 @@ flake8 = "^7.1.1"
 mypy = "^1.14.1"
 black = "^24.10.0"
 isort = "^5.13.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
